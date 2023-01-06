@@ -1,4 +1,6 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="utf-8">
     <title>Balloon Order page - Welcome and choose a Balloon</title>
@@ -15,15 +17,46 @@
 </header>
 <main>
     <div>
-        <ul>
 
-            <li th:each="balon: ${balloons12}">
-                <th:block th:text="${balon.getName()}"></th:block>
-                <th:block th:text="${balon.getDescription()}"></th:block>
-            </li>
-        </ul>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>description</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="balon : ${balloonList1}">
+                <td th:text="${balon.getName()}"></td>
+                <td th:text="${balon.getDescription()}"></td>
+                <td>
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <form th:method="get" th:action= "@{'/balloons/edit-form/{id}' (id=${balon.getId()})}">
+                        <button th:value="submit">Update</button>
+                    </form>
+                    </th:block>
+
+
+                    <form th:method="post" th:action= "@{'/balloons/delete/{id}' (id=${balon.getId()})}">
+                        <button th:value="submit">Delete</button>
+                    </form>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+        <form method="get" th:action="@{/balloons/add}">
+            <button th:value="submit">Add</button>
+        </form>
+
+
 
     </div>
+
 <form th:action="@{/da}" method="post">
     <h2>Choose balloon color:</h2>
     <input type="radio" name="color" value="Red Balloon"> Red Balloon<br/>
