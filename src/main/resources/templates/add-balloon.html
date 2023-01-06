@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>WP lab - Delivery Info</title>
+
+</head>
+<body>
+<header>
+    <h1>AddBalloon</h1>
+</header>
+<section>
+
+    <form method="post" th:action="@{/balloons/add}">
+        <input id="id"  name="id" th:value="(${balonZaEdit} != null ? ${balonZaEdit.getId()} : '')">
+        <br/>
+        <label for="balloonName">BalloonName:</label><br/>
+        <input type="text" id="balloonName"
+               name="balloonName"
+
+        /><br/>
+        <label for="description">BalloonDescription:</label><br/>
+        <input type="text" id="description" name="descirption"/><br/>
+        <label for="manufacturerId">Manufacturer:</label><br/>
+        <select id="manufacturerId" name="manufacturerId">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <br/>
+        <button th:value="submit" >Submitaa</button>
+    </form>
+
+
+</section>
+
+<aside>
+
+</aside>
+</body>
+</html>
